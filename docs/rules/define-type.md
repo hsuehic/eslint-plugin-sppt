@@ -4,15 +4,11 @@
 >
 > - ⭐️ This rule is included in `plugin:sppt/recommended` preset.
 
-> An example rule.
->
-> - ⭐️ This rule is included in `plugin:xxxx/recommended` preset.
-
 This is an example.
 
 ## Rule Details
 
-This rule aimed at disallowing `example` identifiers.
+This rule enforce add type annotation for declaration.
 
 Examples of **incorrect** code:
 
@@ -27,7 +23,7 @@ Examples of **correct** code:
 ```js
 /*eslint template/example-rule: error */
 
-var foo = 1;
+var foo: number = 1;
 ```
 
 ## Options

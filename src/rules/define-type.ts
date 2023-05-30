@@ -7,7 +7,7 @@ const rule: TSESLint.RuleModule<'define-type', []> = {
       description: 'Enforce type anotation for array declaration.',
       suggestion: true,
       recommended: 'warn',
-      url: 'https://github.com/hsuehic/eslint-plugin-sppt/blob/main/docs/rules/define-array-type.md',
+      url: 'https://github.com/hsuehic/eslint-plugin-sppt/blob/main/docs/rules/define-type.md',
     },
     messages: {
       'define-type': 'Add type annotation for declaration.',

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { CLIEngine } from 'eslint';
+import { ESLint } from 'eslint';
 import { rules } from './rules';
 
 const filePath = path.resolve(__dirname, '../../src/index.ts');
@@ -17,8 +17,10 @@ export = {
   },
 };
 `;
-const engine = new CLIEngine({ fix: true });
-const lintResult = engine.executeOnText(rawContent, filePath);
-const content = lintResult.results[0].output || rawContent;
 
-fs.writeFileSync(filePath, content);
+const engine = new ESLint({ fix: true });
+const lintResult = engine.lintText(rawContent, { filePath });
+lintResult.then((results) => {
+  const content = results[0].output || rawContent;
+  fs.writeFileSync(filePath, content);
+});

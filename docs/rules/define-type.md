@@ -1,4 +1,8 @@
-# xxxx/example-rule
+# sppt/define-type
+
+> Enforce type anotation for array declaration.
+>
+> - ⭐️ This rule is included in `plugin:sppt/recommended` preset.
 
 > An example rule.
 >
@@ -32,5 +36,5 @@ Nothing.
 
 ## Implementation
 
-- [Rule source](../../src/rules/example-rule.ts)
-- [Test source](../../tests/rules/example-rule.ts)
+- [Rule source](../../src/rules/define-type.ts)
+- [Test source](../../tests/rules/define-type.ts)

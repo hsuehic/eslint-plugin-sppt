@@ -31,6 +31,7 @@ import { pluginId } from './lib/plugin-id';
   fs.writeFileSync(
     docPath,
     `# ${pluginId}/${ruleId}
+
 > (TODO: summary)
 
 (TODO: why is this rule useful?)

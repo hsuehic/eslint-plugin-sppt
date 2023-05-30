@@ -1,6 +1,6 @@
-import { TSESLint } from '@typescript-eslint/utils';
+import { TSESLint, TSESTree } from '@typescript-eslint/utils';
 
-const rule: TSESLint.RuleModule<'define-array-type', []> = {
+const rule: TSESLint.RuleModule<'define-type', []> = {
   defaultOptions: [],
   meta: {
     docs: {
@@ -10,7 +10,7 @@ const rule: TSESLint.RuleModule<'define-array-type', []> = {
       url: 'https://github.com/hsuehic/eslint-plugin-sppt/blob/main/docs/rules/define-array-type.md',
     },
     messages: {
-      'define-array-type': "'example' identifier is forbidden.",
+      'define-type': 'Add type annotation for declaration.',
     },
     schema: [],
     type: 'suggestion',
@@ -18,10 +18,13 @@ const rule: TSESLint.RuleModule<'define-array-type', []> = {
 
   create(context) {
     return {
-      "Identifier[name='example']"(node) {
+      VariableDeclarator(node: TSESTree.VariableDeclarator): void {
+        if (node.id.typeAnnotation) {
+          return;
+        }
         context.report({
           node,
-          messageId: 'define-array-type',
+          messageId: 'define-type',
         });
       },
     };

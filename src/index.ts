@@ -6,6 +6,6 @@ export = {
     recommended: import('./configs/recommended'),
   },
   rules: {
-    'example-rule': import('./rules/define-array-type'),
+    'example-rule': import('./rules/define-type'),
   },
 };

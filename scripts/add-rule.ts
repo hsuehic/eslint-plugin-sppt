@@ -47,7 +47,7 @@ import { pluginId } from './lib/plugin-id';
 
   fs.writeFileSync(
     rulePath,
-    `import { TSESLint } from "@typescript-eslint/experimental-utils";
+    `import { TSESLint } from "@typescript-eslint/utils";
 
 const rule: TSESLint.RuleModule<"", []> = {
   meta: {
@@ -86,7 +86,7 @@ export = rule;
   fs.writeFileSync(
     testPath,
     `
-import { TSESLint } from "@typescript-eslint/experimental-utils";
+import { TSESLint } from "@typescript-eslint/utils";
 import rule from "../../src/rules/${ruleId}";
 
 new TSESLint.RuleTester().run("${ruleId}", rule, {

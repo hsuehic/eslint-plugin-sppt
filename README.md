@@ -77,6 +77,12 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 
 <!--RULE_TABLE_BEGIN-->
 
+### Best Practices
+
+| Rule ID                                                               | Description                                                                       |     |
+| :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------- | :-: |
+| [sppt/declaration-array-type](./docs/rules/declaration-array-type.md) | Add explicit type declarations for array variables whose type can not be inferred | ⭐️ |
+
 <!--RULE_TABLE_END-->
 
 ## Semantic Versioning Policy

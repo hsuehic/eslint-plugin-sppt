@@ -4,7 +4,7 @@ module.exports = {
     node: true,
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'prettier'],
   extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   parserOptions: {
     ecmaVersion: 12,
@@ -20,4 +20,14 @@ module.exports = {
       },
     },
   ],
+  rules: {
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'prettier/prettier': [
+      'error',
+      {},
+      {
+        usePrettierrc: true,
+      },
+    ],
+  },
 };

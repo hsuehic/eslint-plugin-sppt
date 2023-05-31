@@ -1,14 +1,36 @@
 # sppt/define-type
 
 > Enforce type anotation for array declaration.
->
-> - ⭐️ This rule is included in `plugin:sppt/recommended` preset.
 
-This is an example.
+<!--cases-->
+
+## Cases
+
+### ✅ Correct
+
+```ts
+const foo: number = 1;
+```
+
+```ts
+let foo: number;
+```
+
+### ❌ Incorrect
+
+```ts
+const foo = 1;
+```
+
+```ts
+let foo;
+```
+
+<!--cases-->
 
 ## Rule Details
 
-This rule enforce add type annotation for declaration.
+This rule aimed at enforcing adding type annotation for declaration.
 
 Examples of **incorrect** code:
 
@@ -23,7 +45,7 @@ Examples of **correct** code:
 ```js
 /*eslint template/example-rule: error */
 
-var foo: number = 1;
+var foo = 1;
 ```
 
 ## Options

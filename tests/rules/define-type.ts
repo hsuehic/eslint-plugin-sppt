@@ -1,9 +1,7 @@
 import { TSESLint } from '@typescript-eslint/utils';
 import rule from '../../src/rules/define-type';
 
-new TSESLint.RuleTester({
-  parser: require.resolve('@typescript-eslint/parser'),
-}).run('define-type', rule, {
+export const cases = {
   valid: ['const foo:number = 1;', 'let foo: number;'],
   invalid: [
     {
@@ -15,4 +13,8 @@ new TSESLint.RuleTester({
       errors: [{ messageId: 'define-type' }],
     },
   ],
-});
+} as const satisfies TSESLint.RunTests<'define-type', []>;
+
+new TSESLint.RuleTester({
+  parser: require.resolve('@typescript-eslint/parser'),
+}).run('define-type', rule, cases);

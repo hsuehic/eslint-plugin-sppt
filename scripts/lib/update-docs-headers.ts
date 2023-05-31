@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { TSESLint } from '@typescript-eslint/utils';
 import { pluginId } from './plugin-id';
 import { rules } from './rules';
 import type { RuleInfo } from './rules';
@@ -17,8 +18,9 @@ declare namespace Intl {
   }
 }
 
-const headerPattern = /^#.+\n\n(?:>.+\n)*\n+/u;
-const footerPattern = /\n+## Implementation[\s\S]*$/u;
+const headerPattern = /<!--header-->(\n|.)+<!--header-->/u;
+const casePattern = /<!--cases-->(\n|.)+<!--cases-->/gmu;
+const footerPattern = /<!--footer-->(\n|.)+<!--footer-->/u;
 const ruleRoot = path.resolve(__dirname, '../../src/rules');
 const testRoot = path.resolve(__dirname, '../../tests/rules');
 const docsRoot = path.resolve(__dirname, '../../docs/rules');
@@ -57,6 +59,21 @@ function renderHeader(rule: RuleInfo): string {
 }
 
 /**
+ * Render code of use cases
+ * @param rule {RuleInfo}
+ * @returns {string} content
+ */
+function renderCases(rule: RuleInfo): string {
+  const cases = require(`../../tests/rules/${rule.name}`)
+    .cases as TSESLint.RunTests<string, []>;
+  return `<!--cases-->\n## Cases\n\n### ✅ Correct\n\n${cases.valid
+    .map((v) => `\`\`\`ts\n${v}\n\`\`\``)
+    .join('\n\n')}\n\n### ❌ Incorrect\n\n${cases.invalid
+    .map((v) => `\`\`\`ts\n${v.code}\n\`\`\``)
+    .join('\n\n')}\n<!--cases-->`;
+}
+
+/**
  * Render the document header of a given rule.
  */
 function renderFooter(rule: RuleInfo): string {
@@ -74,8 +91,14 @@ function renderFooter(rule: RuleInfo): string {
 for (const rule of rules) {
   const filePath = path.resolve(docsRoot, `${rule.name}.md`);
   const original = fs.readFileSync(filePath, 'utf8');
-  const body = original.replace(headerPattern, '').replace(footerPattern, '');
-  const content = `${renderHeader(rule)}${body}${renderFooter(rule)}\n`;
+  const strHeader = renderHeader(rule);
+  const strCases = renderCases(rule);
+  const strFooter = renderFooter(rule);
+  const body = original
+    .replace(headerPattern, '')
+    .replace(casePattern, '')
+    .replace(footerPattern, '');
+  const content = `${strHeader}${strCases}${body}${strFooter}\n`;
 
   fs.writeFileSync(filePath, content);
 }

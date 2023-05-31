@@ -3,6 +3,6 @@
 export = {
   plugins: ['sppt'],
   rules: {
-    'sppt/define-type': 'error',
+    'sppt/declaration-array-type': 'error',
   },
 };

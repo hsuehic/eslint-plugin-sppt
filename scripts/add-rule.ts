@@ -30,8 +30,7 @@ import { pluginId } from './lib/plugin-id';
   // Generate files.
   fs.writeFileSync(
     docPath,
-    `# ${pluginId}/${ruleId}
-
+    `<!--header--># ${pluginId}/${ruleId}<!--header-->
 > (TODO: summary)
 
 (TODO: why is this rule useful?)

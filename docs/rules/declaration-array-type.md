@@ -55,15 +55,7 @@ let c = new Array(5);
 let d = new Array<number>(5);
 ```
 
-<!--cases--><!--headeer-->
-
-# @shopee/sppt/declaration-array-type
-
-> Add explicit type declarations for array variables whose type can not be inferred
->
-> - ⭐️ This rule is included in `plugin:@shopee/sppt/recommended` preset.
-
-<!--header-->
+<!--cases-->
 
 (TODO: why is this rule useful?)
 

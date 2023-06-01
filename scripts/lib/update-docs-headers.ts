@@ -30,7 +30,7 @@ const listFormatter = new Intl.ListFormat('en', { type: 'conjunction' });
  * Render the document header of a given rule.
  */
 function renderHeader(rule: RuleInfo): string {
-  const lines = [`# ${rule.id}`, '', `> ${rule.description}`];
+  const lines = [`<!--header--># ${rule.id}`, '', `> ${rule.description}`];
 
   if (rule.recommended) {
     lines.push(
@@ -53,7 +53,7 @@ function renderHeader(rule: RuleInfo): string {
 
     lines.push(`> - ⛔ This rule has been deprecated.${replaceText}`);
   }
-  lines.push('', '');
+  lines.push('', '<!--header-->');
 
   return lines.join('\n');
 }
@@ -85,7 +85,7 @@ function renderFooter(rule: RuleInfo): string {
     .relative(docsPath, path.join(testRoot, `${rule.name}.ts`))
     .replace(/\\/gu, '/');
 
-  return `\n\n## Implementation\n\n- [Rule source](${rulePath})\n- [Test source](${testPath})`;
+  return `\n<!--footer-->\n## Implementation\n\n- [Rule source](${rulePath})\n- [Test source](${testPath})\n<!--footer-->`;
 }
 
 for (const rule of rules) {

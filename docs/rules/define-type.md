@@ -1,8 +1,8 @@
-# sppt/define-type
+<!--header--># sppt/define-type
 
 > Enforce type anotation for array declaration.
 
-<!--cases-->
+<!--header--><!--cases-->
 
 ## Cases
 
@@ -35,16 +35,12 @@ This rule aimed at enforcing adding type annotation for declaration.
 Examples of **incorrect** code:
 
 ```js
-/*eslint template/example-rule: error */
-
 var example = 1;
 ```
 
 Examples of **correct** code:
 
 ```js
-/*eslint template/example-rule: error */
-
 var foo = 1;
 ```
 
@@ -52,7 +48,10 @@ var foo = 1;
 
 Nothing.
 
+<!--footer-->
+
 ## Implementation
 
 - [Rule source](../../src/rules/define-type.ts)
 - [Test source](../../tests/rules/define-type.ts)
+<!--footer-->

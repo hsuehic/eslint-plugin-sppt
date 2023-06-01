@@ -4,5 +4,6 @@ export = {
   plugins: ['sppt'],
   rules: {
     'sppt/declaration-array-type': 'error',
+    'sppt/no-console': 'error',
   },
 };

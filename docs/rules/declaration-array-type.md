@@ -1,10 +1,10 @@
-# sppt/declaration-array-type
+<!--header--># sppt/declaration-array-type
 
 > Add explicit type declarations for array variables whose type can not be inferred
 >
 > - ⭐️ This rule is included in `plugin:sppt/recommended` preset.
 
-<!--cases-->
+<!--header--><!--cases-->
 
 ## Cases
 
@@ -67,7 +67,10 @@ let d = new Array<number>(5);
 
 (TODO: what do options exist?)
 
+<!--footer-->
+
 ## Implementation
 
 - [Rule source](../../src/rules/declaration-array-type.ts)
 - [Test source](../../tests/rules/declaration-array-type.ts)
+<!--footer-->

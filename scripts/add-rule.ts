@@ -30,8 +30,11 @@ import { pluginId } from './lib/plugin-id';
   // Generate files.
   fs.writeFileSync(
     docPath,
-    `<!--header--># ${pluginId}/${ruleId}<!--header-->
+    `<!--header-->
+# ${pluginId}/${ruleId}
+
 > (TODO: summary)
+<!--header-->
 
 (TODO: why is this rule useful?)
 
@@ -47,31 +50,33 @@ import { pluginId } from './lib/plugin-id';
 
   fs.writeFileSync(
     rulePath,
-    `import { TSESLint } from "@typescript-eslint/utils";
+    `import { TSESLint } from '@typescript-eslint/utils';
 
-const rule: TSESLint.RuleModule<"", []> = {
+const rule: TSESLint.RuleModule<'${ruleId}', []> = {
   meta: {
     docs: {
       // TODO: write the rule summary.
-      description: "",
+      description: '',
 
       // TODO: choose the rule category.
-      category: "Possible Errors",
-      category: "Best Practices",
-      category: "Stylistic Issues",
+      category: 'Possible Errors',
+      category: 'Best Practices',
+      category: 'Stylistic Issues',
 
       recommended: false,
-      url: "",
+      url: '',
     },
 
     fixable: null,
-    messages: {},
+    messages: {
+      '${ruleId}': '',
+    },
     schema: [],
 
     // TODO: choose the rule type.
-    type: "problem",
-    type: "suggestion",
-    type: "layout",
+    type: 'problem',
+    type: 'suggestion',
+    type: 'layout',
   },
   create(context) {
     const sourceCode = context.getSourceCode();
@@ -86,13 +91,15 @@ export = rule;
   fs.writeFileSync(
     testPath,
     `
-import { TSESLint } from "@typescript-eslint/utils";
-import rule from "../../src/rules/${ruleId}";
+import { TSESLint } from '@typescript-eslint/utils';
+import rule from '../../src/rules/${ruleId}';
 
-new TSESLint.RuleTester().run("${ruleId}", rule, {
+export const cases = {
   valid: [],
   invalid: [],
-});
+} as const satisfies TSESLint.RunTests<'${ruleId}', []>;
+
+new TSESLint.RuleTester().run('${ruleId}', rule, cases);
 `
   );
 })();

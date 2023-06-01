@@ -48,7 +48,7 @@ A template for ESLint plugins.
 Use [npm](https://www.npmjs.com/) or a compatibility tool to install.
 
 ```
-$ npm install --save-dev eslint eslint-plugin-xxxx
+npm install --save-dev eslint eslint-plugin-xxxx
 ```
 
 ### Requirements
@@ -62,16 +62,16 @@ Write your config file such as `.eslintrc.yml`.
 
 ```yml
 plugins:
-  - xxxx
+  - sppt
 rules:
-  xxxx/example-rule: error
+  sppt/no-console: error
 ```
 
 See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 
 ## Configs
 
-- `xxxx/recommended` ... enables the recommended rules.
+- `sppt/recommended` ... enables the recommended rules.
 
 ## Rules
 
@@ -79,9 +79,10 @@ See also [Configuring ESLint](https://eslint.org/docs/user-guide/configuring).
 
 ### Best Practices
 
-| Rule ID                                                               | Description                                                                       |     |
-| :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------- | :-: |
-| [sppt/declaration-array-type](./docs/rules/declaration-array-type.md) | Add explicit type declarations for array variables whose type can not be inferred | ⭐️ |
+| Rule ID                                                               | Description                                                                       |       |
+| :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------- | :---: |
+| [sppt/declaration-array-type](./docs/rules/declaration-array-type.md) | Add explicit type declarations for array variables whose type can not be inferred |  ⭐️  |
+| [sppt/no-console](./docs/rules/no-console.md)                         | Disallow console expressions                                                      | ⭐️✒️ |
 
 <!--RULE_TABLE_END-->
 

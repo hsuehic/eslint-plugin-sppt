@@ -2,7 +2,7 @@ import { TSESLint } from '@typescript-eslint/utils';
 import rule from '../../src/rules/define-type';
 
 export const cases = {
-  valid: ['const foo:number = 1;', 'let foo: number;'],
+  valid: ['const foo: number = 1;', 'let foo: number;'],
   invalid: [
     {
       code: 'const foo = 1;',

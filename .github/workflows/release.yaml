@@ -9,6 +9,7 @@ permissions: write-all
 
 jobs:
   release_npm_package:
+    if: ${{ contains(github.event.head_commit.message, '[patch]') || contains(github.event.head_commit.message, '[minor]') || contains(github.event.head_commit.message, '[major]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,19 +22,25 @@ jobs:
 
       - run: yarn install
       - run: yarn run build
+      - run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+      - run: git config user.email "xiaoweihsueh@gmail.com"
+      - run: git config user.name "Hsuehic"
       - run: npm version patch
-        if: ${{ contains(github.event.head_commit.message, '[patch]')}}
+        if: ${{ contains(github.event.head_commit.message, '[patch]') }}
         env:
           GH_TOKEN: ${{ secrets.PAT }}
       - run: npm version minor
-        if: ${{ contains(github.event.head_commit.message, '[minor]')}}
+        if: ${{ contains(github.event.head_commit.message, '[minor]') }}
         env:
           GH_TOKEN: ${{ secrets.PAT }}
       - run: npm version major
-        if: ${{ contains(github.event.head_commit.message, '[minor]')}}
+        if: ${{ contains(github.event.head_commit.message, '[minor]') }}
         env:
           GH_TOKEN: ${{ secrets.PAT }}
-      - run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
       - run: npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - run: git push
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}

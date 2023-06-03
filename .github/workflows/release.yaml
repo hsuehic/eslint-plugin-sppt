@@ -25,9 +25,11 @@ jobs:
       - run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
       - run: git config user.email "xiaoweihsueh@gmail.com"
       - run: git config user.name "Hsuehic"
-      - run: npm version patch
+      - name: Version
+        run: npm version patch
         if: ${{ contains(github.event.head_commit.message, '[patch]') }}
         env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.PAT }}
       - run: npm version minor
         if: ${{ contains(github.event.head_commit.message, '[minor]') }}

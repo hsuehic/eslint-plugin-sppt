@@ -19,8 +19,8 @@ jobs:
         with:
           node-version: 16.15.0
 
-      - run: npm ci
-      - run: npm run build
+      - run: yarn install
+      - run: yarn run build
       - run: npm version patch
         if: ${{ contains(github.event.push.head_commit.message, '[patch]')}}
         env:
@@ -33,4 +33,7 @@ jobs:
         if: ${{ contains(github.event.push.head_commit.message, '[minor]')}}
         env:
           GH_TOKEN: ${{ secrets.PAT }}
-      - run: npm run publish
+      - run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+      - run: npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

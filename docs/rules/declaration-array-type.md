@@ -1,4 +1,6 @@
-<!--header--># sppt/declaration-array-type
+<!--header-->
+
+# sppt/declaration-array-type
 
 > Add explicit type declarations for array variables whose type can not be inferred
 >

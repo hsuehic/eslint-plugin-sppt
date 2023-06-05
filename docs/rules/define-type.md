@@ -1,4 +1,6 @@
-<!--header--># sppt/define-type
+<!--header-->
+
+# sppt/define-type
 
 > Enforce type anotation for array declaration.
 

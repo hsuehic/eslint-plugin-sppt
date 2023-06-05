@@ -1,4 +1,6 @@
-<!--header--># sppt/no-console
+<!--header-->
+
+# sppt/no-console
 
 > Disallow console expressions
 >

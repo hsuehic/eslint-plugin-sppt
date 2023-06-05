@@ -2,7 +2,10 @@
 
 [![npm version](https://img.shields.io/npm/v/eslint-plugin-sppt.svg)](https://www.npmjs.com/package/eslint-plugin-sppt)
 [![Downloads/month](https://img.shields.io/npm/dm/eslint-plugin-sppt.svg)](http://www.npmtrends.com/eslint-plugin-sppt)
-[![Build Status](https://travis-ci.org/mysticatea/eslint-plugin-sppt.svg?branch=master)](https://travis-ci.org/mysticatea/eslint-plugin-sppt)
+[![Release](https://github.com/hsuehic/eslint-plugin-sppt/actions/workflows/release.yaml/badge.svg)](https://github.com/hsuehic/eslint-plugin-sppt/actions/workflows/release.yaml/badge.svg?branch=main)
+[![Testing](https://github.com/hsuehic/eslint-plugin-sppt/actions/workflows/test.yaml/badge.svg)](https://github.com/hsuehic/eslint-plugin-sppt/actions/workflows/test.yaml/badge.svg?branch=main)
+[![Linting](https://github.com/hsuehic/eslint-plugin-sppt/actions/workflows/lint.yaml/badge.svg)](https://github.com/hsuehic/eslint-plugin-sppt/actions/workflows/lint.yaml/badge.svg?branch=main)
+[![Build](https://github.com/hsuehic/eslint-plugin-sppt/actions/workflows/build.yaml/badge.svg)](https://github.com/hsuehic/eslint-plugin-sppt/actions/workflows/build.yaml/badge.svg?branch=main)
 [![codecov](https://codecov.io/gh/hsuehic/eslint-plugin-sppt/branch/main/graph/badge.svg?token=PKEVM146B1)](https://codecov.io/gh/hsuehic/eslint-plugin-sppt)
 
 <!--[![Dependency Status](https://david-dm.org/mysticatea/eslint-plugin-sppt.svg)](https://david-dm.org/mysticatea/eslint-plugin-sppt)-->

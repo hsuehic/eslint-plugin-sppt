@@ -3,7 +3,11 @@
 [![npm version](https://img.shields.io/npm/v/eslint-plugin-sppt.svg)](https://www.npmjs.com/package/eslint-plugin-sppt)
 [![Downloads/month](https://img.shields.io/npm/dm/eslint-plugin-sppt.svg)](http://www.npmtrends.com/eslint-plugin-sppt)
 [![Build Status](https://travis-ci.org/mysticatea/eslint-plugin-sppt.svg?branch=master)](https://travis-ci.org/mysticatea/eslint-plugin-sppt)
+<<<<<<< HEAD
 [![Coverage Status](https://codecov.io/gh/mysticatea/eslint-plugin-sppt/branch/main/graph/badge.svg)](https://codecov.io/gh/mysticatea/eslint-plugin-sppt)
+=======
+[![codecov](https://codecov.io/gh/hsuehic/eslint-plugin-sppt/branch/main/graph/badge.svg?token=PKEVM146B1)](https://codecov.io/gh/hsuehic/eslint-plugin-sppt)
+>>>>>>> 37da1f3 (docs:)
 
 <!--[![Dependency Status](https://david-dm.org/mysticatea/eslint-plugin-sppt.svg)](https://david-dm.org/mysticatea/eslint-plugin-sppt)-->
 

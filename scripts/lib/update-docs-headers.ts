@@ -30,7 +30,7 @@ const listFormatter = new Intl.ListFormat('en', { type: 'conjunction' });
  * Render the document header of a given rule.
  */
 function renderHeader(rule: RuleInfo): string {
-  const lines = [`<!--header--># ${rule.id}`, '', `> ${rule.description}`];
+  const lines = [`<!--header-->\n\n# ${rule.id}`, '', `> ${rule.description}`];
 
   if (rule.recommended) {
     lines.push(

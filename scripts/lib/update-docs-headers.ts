@@ -67,7 +67,7 @@ function renderCases(rule: RuleInfo): string {
   const cases = require(`../../tests/rules/${rule.name}`)
     .cases as TSESLint.RunTests<string, []>;
   return `<!--cases-->\n## Cases\n\n### ✅ Correct\n\n${cases.valid
-    .map((v) => `\`\`\`ts\n${v}\n\`\`\``)
+    .map((v) => `\`\`\`ts\n${v instanceof Object ? v.code : v}\n\`\`\``)
     .join('\n\n')}\n\n### ❌ Incorrect\n\n${cases.invalid
     .map((v) => `\`\`\`ts\n${v.code}\n\`\`\``)
     .join('\n\n')}\n<!--cases-->`;

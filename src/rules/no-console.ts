@@ -1,4 +1,9 @@
 import { AST_NODE_TYPES, TSESLint } from '@typescript-eslint/utils';
+import { RuleContext } from '@typescript-eslint/utils/dist/ts-eslint';
+
+export interface Options {
+  allowMethods: string[];
+}
 
 const rule: TSESLint.RuleModule<'no-console', []> = {
   meta: {
@@ -14,14 +19,37 @@ const rule: TSESLint.RuleModule<'no-console', []> = {
 
     fixable: 'code',
     messages: {
-      'no-console': 'No console expressions are allowed',
+      'no-console': 'No console.{{method}} expressions are allowed',
     },
-    schema: [],
-
+    schema: {
+      prefixItems: [
+        {
+          properties: {
+            allowMethods: {
+              type: 'array',
+              description: 'Allow console methods',
+              prefixItems: {
+                type: 'string',
+                description: 'Method name',
+              },
+            },
+          },
+          type: 'object',
+        },
+      ],
+      type: 'array',
+    },
+    defaultOptions: [
+      {
+        allowMethods: [],
+      },
+    ],
     type: 'suggestion',
   },
-  create(context) {
+  create(context: Readonly<RuleContext<'no-console', Options[]>>) {
     const sourceCode = context.getSourceCode();
+    const opt = context.options[0] || { allowMethods: [] };
+    const { allowMethods } = opt;
     return {
       ExpressionStatement(node) {
         if (node.expression.type === AST_NODE_TYPES.CallExpression) {
@@ -29,13 +57,21 @@ const rule: TSESLint.RuleModule<'no-console', []> = {
             if (
               sourceCode.getText(node.expression.callee.object) === 'console'
             ) {
-              context.report({
-                node,
-                messageId: 'no-console',
-                fix(fixer) {
-                  return fixer.remove(node);
-                },
-              });
+              const method = sourceCode.getText(
+                node.expression.callee.property
+              );
+              if (!allowMethods.includes(method)) {
+                context.report({
+                  node,
+                  messageId: 'no-console',
+                  data: {
+                    method,
+                  },
+                  fix(fixer) {
+                    return fixer.remove(node);
+                  },
+                });
+              }
             }
           }
         }
@@ -44,4 +80,4 @@ const rule: TSESLint.RuleModule<'no-console', []> = {
   },
 };
 
-export = rule;
+export default rule;

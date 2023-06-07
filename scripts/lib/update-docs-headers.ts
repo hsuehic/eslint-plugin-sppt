@@ -53,7 +53,7 @@ function renderHeader(rule: RuleInfo): string {
 
     lines.push(`> - ⛔ This rule has been deprecated.${replaceText}`);
   }
-  lines.push('', '<!--header-->');
+  lines.push('', '<!--header-->\n');
 
   return lines.join('\n');
 }
@@ -65,12 +65,28 @@ function renderHeader(rule: RuleInfo): string {
  */
 function renderCases(rule: RuleInfo): string {
   const cases = require(`../../tests/rules/${rule.name}`)
-    .cases as TSESLint.RunTests<string, []>;
-  return `<!--cases-->\n## Cases\n\n### ✅ Correct\n\n${cases.valid
-    .map((v) => `\`\`\`ts\n${v instanceof Object ? v.code : v}\n\`\`\``)
+    .cases as TSESLint.RunTests<string, unknown[]>;
+  return `\n<!--cases-->\n## Cases\n\n### ✅ Correct\n\n${cases.valid
+    .map((v) => {
+      if (v instanceof Object) {
+        const code = `\`\`\`ts\n${v.code}\n\`\`\`\n`;
+        const option =
+          v.options && v.options.length > 0
+            ? `
+With \`options\`:
+\`\`\`json
+${JSON.stringify(v.options && v.options[0])}
+\`\`\`
+`
+            : '';
+        return `${code}${option}`;
+      } else {
+        return `\`\`\`ts\n${v}\n\`\`\``;
+      }
+    })
     .join('\n\n')}\n\n### ❌ Incorrect\n\n${cases.invalid
     .map((v) => `\`\`\`ts\n${v.code}\n\`\`\``)
-    .join('\n\n')}\n<!--cases-->`;
+    .join('\n\n')}\n<!--cases-->\n`;
 }
 
 /**

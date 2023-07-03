@@ -5,7 +5,15 @@ on:
     branches:
       - main
 
-permissions: write-all
+permissions:
+  contents: write
+  pull-requests: write
+  pages: write
+  discussions: write
+  issues: write
+  checks: write
+  actions: write
+  statuses: write
 
 jobs:
   # release_npm_package:

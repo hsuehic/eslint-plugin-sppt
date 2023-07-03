@@ -62,13 +62,16 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
+      - name: Build
+        run: yarn build
+
       - name: Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
           publish: yarn release
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Send a Slack notification if a publish happens

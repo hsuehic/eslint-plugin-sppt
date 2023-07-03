@@ -35,6 +35,9 @@
     "@typescript-eslint/utils": "^5.59.8"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.2",
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@types/eslint": "^7.2.8",
     "@types/jest": "^26.0.22",
     "@types/node": "^20.2.5",

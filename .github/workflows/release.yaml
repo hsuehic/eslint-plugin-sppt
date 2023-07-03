@@ -8,41 +8,70 @@ on:
 permissions: write-all
 
 jobs:
-  release_npm_package:
-    if: ${{ contains(github.event.head_commit.message, '[patch]') || contains(github.event.head_commit.message, '[minor]') || contains(github.event.head_commit.message, '[major]') }}
+  # release_npm_package:
+  #   if: ${{ contains(github.event.head_commit.message, '[patch]') || contains(github.event.head_commit.message, '[minor]') || contains(github.event.head_commit.message, '[major]') }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3.3.0
+  #       with:
+  #         fetch-depth: 0
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16.15.0
+
+  #     - run: yarn install
+  #     - run: yarn run build
+  #     - run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+  #     - run: git config user.email "xiaoweihsueh@gmail.com"
+  #     - run: git config user.name "Hsuehic"
+  #     - name: Version
+  #       run: npm version patch
+  #       if: ${{ contains(github.event.head_commit.message, '[patch]') }}
+  #       env:
+  #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #         GH_TOKEN: ${{ secrets.PAT }}
+  #     - run: npm version minor
+  #       if: ${{ contains(github.event.head_commit.message, '[minor]') }}
+  #       env:
+  #         GH_TOKEN: ${{ secrets.PAT }}
+  #     - run: npm version major
+  #       if: ${{ contains(github.event.head_commit.message, '[minor]') }}
+  #       env:
+  #         GH_TOKEN: ${{ secrets.PAT }}
+  #     - run: npm publish
+  #       env:
+  #         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  #     - run: git push
+  #       env:
+  #         GH_TOKEN: ${{ secrets.PAT }}
+
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3.3.0
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16.15.0
+      - name: Checkout Repo
+        uses: actions/checkout@v3
 
-      - run: yarn install
-      - run: yarn run build
-      - run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
-      - run: git config user.email "xiaoweihsueh@gmail.com"
-      - run: git config user.name "Hsuehic"
-      - name: Version
-        run: npm version patch
-        if: ${{ contains(github.event.head_commit.message, '[patch]') }}
+      - name: Setup Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: yarn release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_TOKEN: ${{ secrets.PAT }}
-      - run: npm version minor
-        if: ${{ contains(github.event.head_commit.message, '[minor]') }}
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-      - run: npm version major
-        if: ${{ contains(github.event.head_commit.message, '[minor]') }}
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
-      - run: npm publish
-        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - run: git push
-        env:
-          GH_TOKEN: ${{ secrets.PAT }}
+      - name: Send a Slack notification if a publish happens
+        if: steps.changesets.outputs.published == 'true'
+        # You can do something when a publish happens.
+        run: echo "A new version of ${GITHUB_REPOSITORY} was published" # my-slack-bot send-notification --message "A new version of ${GITHUB_REPOSITORY} was published!"

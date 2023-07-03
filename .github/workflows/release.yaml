@@ -70,6 +70,8 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: yarn release
+          commit: 'chore: version package and publish'
+          title: 'chore: version package and publish'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

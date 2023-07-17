@@ -27,6 +27,18 @@ npm install --save-dev eslint eslint-plugin-sppt
 
 ## Usage
 
+JSON `.eslintrc`
+
+```json
+{
+  "plugins": ["sppt"],
+  "rules": {
+    "sppt/no-console": "error",
+    "sppt/declaration-array-type": "warn"
+  }
+}
+```
+
 Write your config file such as `.eslintrc.yml`.
 
 ```yml

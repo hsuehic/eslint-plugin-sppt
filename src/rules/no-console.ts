@@ -1,6 +1,6 @@
 import { AST_NODE_TYPES, TSESLint } from '@typescript-eslint/utils';
 import { RuleContext } from '@typescript-eslint/utils/dist/ts-eslint';
-interface Options {
+export interface Options {
   allowMethods: string[];
 }
 
@@ -79,4 +79,4 @@ const rule: TSESLint.RuleModule<'no-console', []> = {
   },
 };
 
-export = rule;
+export default rule;

@@ -1,9 +1,14 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-namespace */
 import fs from 'fs';
 import path from 'path';
+
 import { TSESLint } from '@typescript-eslint/utils';
+
 import { pluginId } from './plugin-id';
-import { rules } from './rules';
 import type { RuleInfo } from './rules';
+import { rules } from './rules';
 
 type ListFormatOptions = {
   type?: 'conjunction' | 'disjunction' | 'unit';
@@ -61,7 +66,7 @@ function renderHeader(rule: RuleInfo): string {
 /**
  * Render code of use cases
  * @param rule {RuleInfo}
- * @returns {string} content
+ * @return {string} content
  */
 function renderCases(rule: RuleInfo): string {
   const cases = require(`../../tests/rules/${rule.name}`)
@@ -69,7 +74,9 @@ function renderCases(rule: RuleInfo): string {
   return `\n<!--cases-->\n## Cases\n\n### ✅ Correct\n\n${cases.valid
     .map((v) => {
       if (v instanceof Object) {
-        const code = `\`\`\`ts\n${v.code}\n\`\`\`\n`;
+        const code = `${
+          v.filename ? `File name: \`${v.filename}\`\n` : ''
+        }\`\`\`ts\n${v.code}\n\`\`\`\n`;
         const option =
           v.options && v.options.length > 0
             ? `

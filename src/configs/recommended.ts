@@ -5,5 +5,6 @@ export = {
   rules: {
     'sppt/declaration-array-type': 'error',
     'sppt/no-console': 'error',
+    'sppt/only-import-export': 'error',
   },
 };

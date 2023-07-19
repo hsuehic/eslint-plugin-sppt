@@ -4,7 +4,9 @@
 
 > Enforce type anotation for array declaration.
 
-<!--header--><!--cases-->
+<!--header-->
+
+<!--cases-->
 
 ## Cases
 

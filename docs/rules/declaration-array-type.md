@@ -6,7 +6,9 @@
 >
 > - ⭐️ This rule is included in `plugin:sppt/recommended` preset.
 
-<!--header--><!--cases-->
+<!--header-->
+
+<!--cases-->
 
 ## Cases
 

@@ -1,5 +1,9 @@
 import { TSESLint } from '@typescript-eslint/utils';
-import rule, { Options } from '../../src/rules/no-console';
+import rule from '../../src/rules/no-console';
+
+interface Options {
+  allowMethods: string[];
+}
 
 const options: Options[] = [{ allowMethods: [] }];
 

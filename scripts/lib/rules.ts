@@ -27,6 +27,8 @@ export const rules: RuleInfo[] = fs
     const filePath = path.join(rootDir, filename);
     const name = filename.slice(0, -3);
     const { meta } = require(filePath);
+    console.log(filePath);
+    console.log(meta);
 
     return {
       filePath,

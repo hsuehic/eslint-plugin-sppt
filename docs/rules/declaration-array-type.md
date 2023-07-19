@@ -40,17 +40,29 @@ let a = new Array<number>(5);
 let a = [];
 ```
 
+Errors:
+Add explicit type declarations for array variables whose type can not be inferred
+
 ```ts
 let a = Array();
 ```
+
+Errors:
+Add explicit type declarations for array variables whose type can not be inferred
 
 ```ts
 let a = Array(5);
 ```
 
+Errors:
+Add explicit type declarations for array variables whose type can not be inferred
+
 ```ts
 let a = new Array();
 ```
+
+Errors:
+Add explicit type declarations for array variables whose type can not be inferred
 
 ```ts
 let a = [];
@@ -58,6 +70,11 @@ let b = new Array(5);
 let c = new Array(5);
 let d = new Array<number>(5);
 ```
+
+Errors:
+Add explicit type declarations for array variables whose type can not be inferred
+Add explicit type declarations for array variables whose type can not be inferred
+Add explicit type declarations for array variables whose type can not be inferred
 
 <!--cases-->
 

@@ -5,6 +5,10 @@ import fs from 'fs';
 import path from 'path';
 
 import { TSESLint } from '@typescript-eslint/utils';
+import {
+  InvalidTestCase,
+  ValidTestCase,
+} from '@typescript-eslint/utils/dist/ts-eslint';
 
 import { pluginId } from './plugin-id';
 import type { RuleInfo } from './rules';
@@ -63,6 +67,53 @@ function renderHeader(rule: RuleInfo): string {
   return lines.join('\n');
 }
 
+function renderValidTestCases(v: string | ValidTestCase<unknown[]>): string {
+  if (v instanceof Object) {
+    const code = `${
+      v.filename ? `File name: \`${v.filename}\`\n` : ''
+    }\`\`\`ts\n${v.code}\n\`\`\`\n`;
+    const option =
+      v.options && v.options.length > 0
+        ? `
+With \`options\`:
+\`\`\`json
+${JSON.stringify(v.options && v.options[0])}
+\`\`\`
+`
+        : '';
+    return `${code}${option}`;
+  } else {
+    return `\`\`\`ts\n${v}\n\`\`\``;
+  }
+}
+
+function formatErrorMessage(
+  err: TSESLint.TestCaseError<string>,
+  messages: Record<string, string>
+): string {
+  let message = messages[err.messageId];
+  if (err.data) {
+    const obj = err.data;
+    Object.keys(err.data).forEach((k) => {
+      const reg = new RegExp(`\\{\\{\\s*${k}\\s*\\}\\}`, 'g');
+      message = message.replace(reg, obj[k] as string);
+    });
+  }
+  return message;
+}
+
+function renderInvalidTestCases(
+  rule: RuleInfo,
+  v: InvalidTestCase<string, unknown[]>
+): string {
+  const caseBasic = renderValidTestCases(v);
+  let error = 'Errors: \n';
+  v.errors.forEach((err) => {
+    error += `${formatErrorMessage(err, rule.messages)}\n`;
+  });
+  return `${caseBasic}\n${error}`;
+}
+
 /**
  * Render code of use cases
  * @param rule {RuleInfo}
@@ -73,26 +124,12 @@ function renderCases(rule: RuleInfo): string {
     .cases as TSESLint.RunTests<string, unknown[]>;
   return `\n<!--cases-->\n## Cases\n\n### ✅ Correct\n\n${cases.valid
     .map((v) => {
-      if (v instanceof Object) {
-        const code = `${
-          v.filename ? `File name: \`${v.filename}\`\n` : ''
-        }\`\`\`ts\n${v.code}\n\`\`\`\n`;
-        const option =
-          v.options && v.options.length > 0
-            ? `
-With \`options\`:
-\`\`\`json
-${JSON.stringify(v.options && v.options[0])}
-\`\`\`
-`
-            : '';
-        return `${code}${option}`;
-      } else {
-        return `\`\`\`ts\n${v}\n\`\`\``;
-      }
+      return renderValidTestCases(v);
     })
     .join('\n\n')}\n\n### ❌ Incorrect\n\n${cases.invalid
-    .map((v) => `\`\`\`ts\n${v.code}\n\`\`\``)
+    .map((v) => {
+      return renderInvalidTestCases(rule, v);
+    })
     .join('\n\n')}\n<!--cases-->\n`;
 }
 

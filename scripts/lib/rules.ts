@@ -1,6 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import fs from 'fs';
 import path from 'path';
+
 import { pluginId } from './plugin-id';
+
 const rootDir = path.resolve(__dirname, '../../src/rules/');
 
 export type RuleInfo = {
@@ -13,6 +18,7 @@ export type RuleInfo = {
   deprecated: boolean;
   fixable: boolean;
   replacedBy: string[];
+  messages: Record<string, string>;
 };
 
 export type CategoryInfo = {
@@ -26,6 +32,7 @@ export const rules: RuleInfo[] = fs
   .map((filename): RuleInfo => {
     const filePath = path.join(rootDir, filename);
     const name = filename.slice(0, -3);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const rule = require(filePath);
     const { meta } = rule.default || rule;
 
@@ -37,7 +44,8 @@ export const rules: RuleInfo[] = fs
       fixable: Boolean(meta.fixable),
       replacedBy: [],
       ...meta.docs,
-    };
+      messages: meta.messages,
+    } satisfies RuleInfo;
   });
 
 export const categories: CategoryInfo[] = [

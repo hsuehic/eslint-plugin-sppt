@@ -49,28 +49,53 @@ export * from './sidebar';
 
 ### ❌ Incorrect
 
+File name: `index.js`
+
 ```ts
 import { Sidebar } from './sidebar';
 const count = 0;
 ```
+
+Errors:
+Only import and export statements are allowed in index.js files.
+
+File name: `index.js`
 
 ```ts
 import { Sidebar } from './sidebar';
 export const count = 0;
 ```
 
+Errors:
+Only import and export statements are allowed in index.js files.
+
+File name: `/src/pages/catalog/index.ts`
+
 ```ts
 import { Sidebar } from './sidebar';
 export function Page() {}
 ```
 
+Errors:
+Only import and export statements are allowed in index.ts files.
+
+File name: `index.ts`
+
 ```ts
 export default function () {}
 ```
 
+Errors:
+Only import and export statements are allowed in index.ts files.
+
+File name: `index.js`
+
 ```ts
 export const Component = () => <div />;
 ```
+
+Errors:
+Only import and export statements are allowed in index.js files.
 
 <!--cases-->
 

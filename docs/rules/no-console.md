@@ -69,29 +69,92 @@ timeStart(1);
 console.count(1);
 ```
 
+With `options`:
+
+```json
+{ "allowMethods": [] }
+```
+
+Errors:
+No console.count expressions are allowed
+
 ```ts
 console.error(1);
 ```
+
+With `options`:
+
+```json
+{ "allowMethods": [] }
+```
+
+Errors:
+No console.error expressions are allowed
 
 ```ts
 console.info(1);
 ```
 
+With `options`:
+
+```json
+{ "allowMethods": [] }
+```
+
+Errors:
+No console.info expressions are allowed
+
 ```ts
 console.profile(1);
 ```
+
+With `options`:
+
+```json
+{ "allowMethods": [] }
+```
+
+Errors:
+No console.profile expressions are allowed
 
 ```ts
 console.time(1);
 ```
 
+With `options`:
+
+```json
+{ "allowMethods": [] }
+```
+
+Errors:
+No console.time expressions are allowed
+
 ```ts
 console.timeEnd(1);
 ```
 
+With `options`:
+
+```json
+{ "allowMethods": [] }
+```
+
+Errors:
+No console.timeEnd expressions are allowed
+
 ```ts
 console.timeStart(1);
 ```
+
+With `options`:
+
+```json
+{ "allowMethods": [] }
+```
+
+Errors:
+No console.timeStart expressions are allowed
 
 <!--cases-->
 

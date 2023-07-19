@@ -26,9 +26,15 @@ let foo: number;
 const foo = 1;
 ```
 
+Errors:
+Add type annotation for declaration.
+
 ```ts
 let foo;
 ```
+
+Errors:
+Add type annotation for declaration.
 
 <!--cases-->
 
